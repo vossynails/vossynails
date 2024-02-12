@@ -1,0 +1,410 @@
+<style>
+.section-{{ section.id }} .content_position--top-left {
+    top:0;
+     left:0;
+  }
+
+ .section-{{ section.id }} .content_position--top-center {
+    top:0;
+     left:50%;
+    transform:translatex(-50%);
+  }
+
+  .section-{{ section.id }} .content_position--top-right {
+    top:0;
+     right:0;
+  }
+
+  .section-{{ section.id }} .content_position--middle-left {
+    top:50%;
+     left:0;
+  }
+
+  .section-{{ section.id }} .content_position--middle-center {
+     top:50%;
+     left:50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .section-{{ section.id }} .content_position--middle-right {
+    top:50%;
+     right:0;
+  }
+
+  .section-{{ section.id }} .content_position--bottom-left {
+         bottom: 0;
+    left: 0;
+  }
+
+  .section-{{ section.id }} .content_position--bottom-center {
+    bottom:0;
+     left:50%;
+    transform:translatex(-50%);
+  }
+
+  .section-{{ section.id }} .content_position--bottom-right {
+   bottom:0;
+     right:0;
+  }
+
+  
+  
+  .video_description.w50 {
+    /* height: 80vh;  */
+    overflow-y: auto;
+}
+  .video_with_description .dlfl{
+    gap:20px;
+  }
+  .video_with_description .pos-abs {
+    position: absolute;
+    {% comment %} left: 12px; {% endcomment %}
+    /* bottom: 13px; */
+    padding:20px ;
+}
+  @media screen and (max-width:768px){
+    .video_with_description .video_image_wrapper.dlfl{
+      flex-wrap:wrap;
+    }
+    .video_with_description .w50 {
+    width: 100%;
+}
+     .video_image_wrapper .video_description.w50 {
+    height: initial;
+}
+  .video_with_description .metafield-rich_text_field h5 {
+    margin-top: 15px !important;
+    margin-bottom: 10px !important;
+}
+    .video_description.w50 video.wh100.ofc {
+      /* max-height: 345px; */
+    min-height: 180px;
+    }
+   .different_style_of_image {
+    padding-left: 0;
+    padding-right: 0;
+}
+    .different_style_of_image .video_image_wrapper .video_description.w50 {
+    margin: 0 1.5rem;
+}
+    .different_style_of_image .image__container_inner img {
+      border-radius:0!important;
+          aspect-ratio: 7/5;
+
+    }
+  }
+
+  .section-{{ section.id }} .video_description {
+    padding: 15px;
+    border-radius:{{section.settings.bor-video}}px;
+}
+.section-{{ section.id }} .heading_wrapper img{
+  border-radius:{{section.settings.bor-img}}px;
+}
+  .section-{{ section.id }}.video_alignment_right {
+    display: flex;
+    flex-direction: row-reverse;
+}
+  .section-{{ section.id }} .heading_wrapper.w50.pos-rel div, .section-{{ section.id }}.video_with_description .metafield-rich_text_field h5{
+    color:{{section.settings.img_text_clr}};
+  }
+  .section-{{ section.id }} .video_description.w50{
+    background:{{section.settings.video_bg}}
+  }
+   .section-{{ section.id }}.video_with_description .metafield-rich_text_field p{
+     color:{{section.settings.video_bg_text_des}};
+   }
+   @media screen and (min-width:767px) {
+     .video_description.w50 .dlfl {
+       gap:15px;
+     }
+   }
+ .video_with_description .metafield-rich_text_field p {
+    /* margin: 0; */
+    font-size: 1.5rem;
+ }
+ .video_with_description .metafield-rich_text_field h5 {
+    font-size: 2rem;
+    margin-top: 7px;
+    margin-bottom: 20px;
+}
+  @media screen and (min-width:768px) { 
+.image__container_inner {
+  position:absolute;
+top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+  }
+</style>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% if product.metafields.custom.video_with_text_top_section != blank %}
+  
+<div class="video_with_description section-{{ section.id }}-padding section-{{ section.id }}" style="background:{{ section.settings.video_bg_sec }}">
+<div class="page-width{% if section.settings.differ__styling %} different_style_of_image{% endif %}">
+<div class="video_image_wrapper dlfl video_alignment_{{ section.settings.vertical_alignment }}">
+   {% for block in section.blocks %}
+     {% case block.type %}
+       {% when 'img-text' %}
+       <div class="heading_wrapper w50 pos-rel">
+       <div class="image__container_inner">
+         {% if  block.settings.first_image != blank %}
+           {{ 
+            block.settings.first_image
+            | image_url: width: 1500
+            | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class:'wh100 ofc'
+          }}
+           {% endif %}
+        {% if block.settings.title !=blank %}<div class="h2 pos-abs content_position--{{ block.settings.content__position }}">{{ block.settings.title }}</div>{% endif %}
+       </div>
+       </div>
+       {% when 'video' %}
+         <div class="video_description w50">
+       <div class="dlfl">
+          <div class="{% if block.settings.first_image1 !=blank %}w50{% endif %}" style="border-radius:{{block.settings.boder-radiuss }}px; overflow:hidden;">
+           {% if block.settings.video !=blank %}
+            {{
+            block.settings.video
+            | video_tag: image_size: '1100x', loop: section.settings.enable_video_looping, controls: true, autoplay: true, muted: true, class:'wh100 ofc'
+            }}
+          {% endif %}
+          </div>
+           {% if block.settings.first_image1 !=blank %}
+           <div class="{% if block.settings.video !=blank %}w50 border_radius{% endif %} {{block.settings.boder-radiuss1 }}" style="border-radius:{{block.settings.boder-radiuss1 }}px; overflow:hidden;">
+           {{ 
+            block.settings.first_image1
+            | image_url: width: 1500
+            | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class:'wh100 ofc'
+           }}
+          </div>
+          {% endif %}
+       </div>
+        {% if block.settings.description != blank %}   <div>{{ block.settings.description }}</div>{% endif %}
+         </div>
+      {% endcase %}
+   {% endfor %}
+</div>
+</div>
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "video with description",
+    "settings": [
+            {
+          "type": "color",
+          "id": "video_bg_sec",
+          "label": "background color of video description",
+          "default": "#F0E6E2"
+        },
+         {
+          "type": "color",
+          "id": "img_text_clr",
+          "label": "heading color",
+          "default": "#fff"
+        },
+                    {
+          "type": "color",
+          "id": "video_bg",
+          "label": "Video background color",
+          "default": "#fff"
+        },
+                   {
+          "type": "color",
+          "id": "video_bg_text_des",
+          "label": "Video description color",
+          "default": "#000"
+        },
+       {
+          "type": "select",
+          "id": "vertical_alignment",
+          "label": "Video alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+            {
+          "type": "range",
+          "id": "bor-img",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Image corner radius",
+          "default": 6
+       },
+       {
+          "type": "range",
+          "id": "bor-video",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "video & image background corner radius",
+          "default": 6
+       },
+          {
+            "type":"checkbox",
+            "id":"differ__styling",
+            "label":"Use image as banner on image"
+          },
+      {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+    ],
+    "blocks":[
+      {
+        "type":"img-text",
+        "name":"Image & Heading",
+        "settings":[
+          {
+            "type": "image_picker",
+            "id": "first_image",
+            "label": "Image"
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label":"Heading",
+            "default": "<p>MY CONDITIONER EASES COMBING AND DETANGLING</p>"
+          },
+          {
+        "type": "select",
+        "id": "content__position",
+             "label": "Content Alignment",
+        "options": [
+          {
+            "value": "top-left",
+            "label": "top-left"
+          },
+          {
+            "value": "top-center",
+            "label": "top-center"
+          },
+          {
+            "value": "top-right",
+            "label": "top-right"
+          },
+          {
+            "value": "middle-left",
+            "label": "middle-left"
+          },
+          {
+            "value": "middle-center",
+            "label": "middle-center"
+          },
+          {
+            "value": "middle-right",
+            "label": "middle-right"
+          },
+          {
+            "value": "bottom-left",
+            "label": "bottom-left"
+          },
+          {
+            "value": "bottom-center",
+            "label": "bottom-center"
+          },
+          {
+            "value": "bottom-right",
+            "label": "bottom-right"
+          }
+        ],
+        "default": "middle-center"
+      }
+        ]
+      },
+      {
+        "type":"video",
+        "name":"Video",
+        "settings":[
+          {
+            "type": "video",
+            "id": "video",
+            "label":"Video"
+          },
+           {
+            "type": "image_picker",
+            "id": "first_image1",
+            "label": "Image"
+          },
+             {
+            "type": "richtext",
+            "id": "description",
+            "label":"Description"
+          },
+        {
+      "type": "range",
+      "id": "boder-radiuss",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner radius video",
+      "default": 10
+    },
+            {
+          "type": "range",
+          "id": "boder-radiuss1",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Corner radius image",
+          "default": 10
+        }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Video with description"
+      }
+    ]
+  }
+{% endschema %}
+

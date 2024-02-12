@@ -1,0 +1,27 @@
+.related-products {
+  display: block;
+}
+
+.related-products__heading {
+  margin: 0 0 3rem;
+}
+/* .related-products .product-card-wrapper .card__content.custom {
+      margin-top: initial;
+      transform: initial;
+}  */
+
+.related-products .card__content {
+  display:block;
+}
+/* .card__content_mian_con {
+    overflow: hidden;
+} */
+@media screen and (max-width:750px) {
+  product-recommendations.related-products .grid--2-col-tablet-down .grid__item {
+    /* width:100%; */
+    /* max-width:100%;/ */
+  }
+ product-recommendations.related-products .grid {
+    /* gap: 1.5rem; */
+}
+}

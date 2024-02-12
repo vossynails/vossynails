@@ -1,0 +1,130 @@
+ {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+      .image_section_mobile {
+        display:none;
+      }
+    }
+   .main-wrapper{
+    padding: 15px;
+}
+  .content-image img {
+    width: 100%;
+    height: auto;
+    border-radius:{{ section.settings.b_radius }}px !important;
+}  
+   h2.image-heading {
+    font-size: 1.7rem;
+         margin-bottom: 8px;
+}
+   .image-description p {
+    margin: 0;
+}
+  {%- endstyle -%}
+<div class="page-width section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} image_section_mobile">
+  <div class="main-wrapper" style="background:{{ section.settings.bgcolor }}; border-radius:{{ section.settings.b_radius }}px;">
+    <div class="content-image media" style="padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;  border-radius:{{ section.settings.b_radius }}px;"
+ >
+    {%- if section.settings.image != blank -%}
+      {%- if section.settings.image_behavior == 'ambient' -%}
+        {%- assign widths = '198, 432, 642, 900, 1284, 1800' -%}
+        {%- capture sizes -%}
+              (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 1.6667 }}px,
+              (min-width: 750px) calc((100vw - 130px) / 1.667), calc((100vw - 50px) / 1.667)
+            {%- endcapture -%}
+      {%- else -%}
+        {%- assign widths = '165, 360, 535, 750, 1070, 1500' -%}
+        {%- capture sizes -%}
+              (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+              (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+            {%- endcapture -%}
+      {%- endif -%}
+      {{ section.settings.image | image_url: width: 400 | image_tag: loading: 'lazy', sizes: sizes, widths: widths }}
+    {%- else -%}
+      {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+    </div>
+    <div class="content-wrapper">
+      <h2 class="image-heading">{{ section.settings['image-heading'] }}</h2>
+      <div class="image-description">{{ section.settings['image-description'] }}</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "image section mobile",
+  "settings": [
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "t:sections.image-with-text.settings.image.label"
+  },
+          {
+    "type": "inline_richtext",
+    "id": "image-heading",
+    "label": "Heading"
+  },
+          {
+    "type": "richtext",
+    "id": "image-description",
+    "label": "Description"
+  },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "Backround Color",
+      "default": "#fff"
+    },
+     {
+      "type": "range",
+      "id": "b_radius",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets":[
+    {
+      "name":"image section mobile"
+    }
+  ]
+}
+{% endschema %}

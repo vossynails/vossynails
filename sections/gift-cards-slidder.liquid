@@ -1,0 +1,358 @@
+<style>
+    .custom_slider .heading2{
+    color:{{section.settings.card-color}};
+    text-transform: uppercase;
+  }
+
+.custom_slider .slider-buttons {
+    max-width: 100%;
+    width: 100%;
+    gap: 10px;
+}
+    .custom_slider a img{
+      border-radius:{{section.settings.border_radius}}px;
+      vertical-align:middle;
+    }
+  .custom_slider .slider-button{
+    background:#fff;
+    border-radius:50px;
+  }
+  .custom_slider .slider-button .icon {
+    height: 1rem;
+   }
+  .custom_slider .bton {
+    border-radius: 4px;
+}
+  .custom_slider_wraper {
+    padding-bottom: 20px;
+}
+  .custom_slider_wraper .abs-tl50 {
+    text-align: center;
+    width: 100%;
+    padding: 0 2rem;
+}
+.max-width-80 {
+    max-width: 80%;
+    margin: auto;
+}
+@media screen and (max-width:767px){
+.custom_slider {
+    padding: 18px 10px;
+}
+  .custom_slider h1{
+    font-size:20px;
+  }
+}
+  @media screen and (min-width:768px){
+      .custom_slider .grid--1-col .grid__item {
+    max-width: 33%;
+    width: 100%;
+  }
+      .custom_slider .announcement-bar-slider .slider {
+    width: 100%;
+    gap: 20px;
+    padding: 10px 28px;
+    padding-left: 0;
+}
+  }
+ .custom_slider .bton.td-none{
+       padding:9px 24px;
+    transition:all 300ms ease;
+    border: 1px solid #000000;
+    background-color:{{ section.settings.btn_bg }};
+  color:{{ section.settings.btn_clr }};
+       display: flex;
+ }
+
+  .custom_slider .bton.td-none:hover {
+    background: {{section.settings.background-hov}};
+    color: {{section.settings.txt_clr-hover}};
+}
+  .custom_slider .tac.buton {
+    display: flex;
+    justify-content: center;
+}
+  .custom_slider {
+    box-shadow: 0 0 0 100vmax var(--gradient-background);
+    clip-path: inset(0 -100vmax);
+}
+</style>
+
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+
+{% if section.settings.image_shape == 'blob' %}
+  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- if section.settings.enable_quick_add -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign products_to_display = section.settings.collection.all_products_count
+
+  if section.settings.collection.all_products_count > section.settings.products_to_show
+    assign products_to_display = section.settings.products_to_show
+    assign more_in_collection = true
+  endif
+
+  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+  assign show_mobile_slider = false
+  if section.settings.swipe_on_mobile and products_to_display > columns_mobile_int
+    assign show_mobile_slider = true
+  endif
+
+  assign show_desktop_slider = false
+  if section.settings.enable_desktop_slider and products_to_display > section.settings.columns_desktop
+    assign show_desktop_slider = true
+  endif
+-%}
+
+<div class="custom_slider color-{{ section.settings.color_scheme }} isolate gradient section-{{ section.id }}-padding page-width">
+
+
+     {% if section.settings.section-titlle != blank %} <h2 class="tac h1" style="color:{{ section.settings.txt_clr }}">{{ section.settings.section-titlle }}</h2>{% endif %}
+     {% if section.settings.paragraph != blank %} <div class="tac max-width-80" style="color:{{ section.settings.txt_clr }}">{{ section.settings.paragraph }}</div>{% endif %}
+  
+  
+    <slider-component class="slider-mobile-gutter slider-component-full-width page-width  slider-component-desktop scroll-trigger animate--slide-in">
+     <div class="announcement-bar-slider slider-buttons custom_slider_wraper">
+          <button
+            type="button"
+            class="slider-button slider-button--prev"
+            name="previous"
+            aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
+            aria-controls="Slider-{{ section.id }}"
+          >
+            {% render 'icon-caret' %}
+          </button>
+          <div
+            class="grid grid--1-col slider slider--everywhere"
+            id="Slider-{{ section.id }}"
+            aria-live="polite"
+            aria-atomic="true"
+            data-autoplay="{{ section.settings.auto_rotate }}"
+            data-speed="{{ section.settings.change_slides_speed }}"
+          >
+            {%- for block in section.blocks -%}
+              <div
+                class="slideshow__slide slider__slide grid__item grid--1-col"
+                id="Slide-{{ section.id }}-{{ forloop.index }}"
+                {{ block.shopify_attributes }}
+                role="group"
+                aria-roledescription="{{ 'sections.announcements.announcement' | t }}"
+                aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"
+                tabindex="-1"
+              >
+                <div
+                  class="announcement-bar__announcement"
+                  role="region"
+                  aria-label="{{ 'sections.header.announcement' | t }}"
+                  {{ block.shopify_attributes }}
+                 >
+                      <a 
+                        href="{{ block.settings.button_link }}"
+                        class="link--text focus-inset animate-arrow  pos-rel td-none"
+                      >
+                    
+                    {% if block.settings.image1 != blank %}
+                    {{
+                    block.settings.image1
+                    | image_url: width: 1500
+                   | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                    }}
+                   {% endif %} 
+                  {% if block.settings.title_card != blank %} <h2 class="abs-tl50 heading2">{{ block.settings.title_card }}</h2>{% endif %}
+                      </a>
+                </div>
+              </div>
+            {%- endfor -%}
+
+            
+          </div>
+          <button
+            type="button"
+            class="slider-button slider-button--next"
+            name="next"
+            aria-label="{{ 'sections.announcements.next_announcement' | t }}"
+            aria-controls="Slider-{{ section.id }}"
+          >
+            {% render 'icon-caret' %}
+          </button>
+        </div>
+    </slider-component>
+
+      <div class="tac buton"><a class="tac bton td-none buttons" href="{{ section.settings.btn-urll }}">{{section.settings.btn_title}}</a></div>
+  
+  </div>
+
+{% schema %}
+{
+  "name": "gift card sildder",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+         {
+        "type": "text",
+        "id": "section-titlle",
+        "label": "Heading",
+        "default": "gift card headings"
+      },
+            {
+        "type": "richtext",
+        "id": "paragraph",
+        "label": "Description"
+      },
+       {
+        "type": "text",
+        "id": "btn_title",
+        "label": "Button title",
+        "default": "shop now"
+      },
+        {
+        "type": "url",
+        "id": "btn-urll",
+        "label": "Button link"
+      },
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background color",
+        "default": "#F0E6E2"
+      },
+      {
+        "type": "color",
+        "id": "txt_clr",
+        "label": "Heading color",
+        "default": "#000000"
+      },
+         {
+        "type": "color",
+        "id": "card-color",
+        "label": "Card heading color",
+        "default": "#000000"
+      },
+             {
+        "type": "color",
+        "id": "btn_clr",
+        "label": "Button color",
+        "default": "#000000"
+      },
+        {
+        "type": "color",
+        "id": "btn_bg",
+        "label": "Button background color",
+        "default": "#fff"
+      },
+       {
+        "type": "color",
+        "id": "background-hov",
+        "label": "Button background color on hover",
+        "default": "#F0E6E2"
+      },
+      {
+        "type": "color",
+        "id": "txt_clr-hover",
+        "label": "Buttton color on hover",
+        "default": "#000000"
+      },
+    {
+      "type": "checkbox",
+      "id": "enable_desktop_slider",
+      "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "background-1"
+    },
+    {
+    "type": "range",
+    "id": "border_radius",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "label": "Corner radius around image",
+    "default": 0
+  },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+   "blocks":[
+      {
+         "name":"gift cards",
+          "type":"text",
+          "settings":[
+          {
+            "type": "image_picker",
+            "id": "image1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title_card",
+            "label": "Heading",
+            "default": "Quick links"
+          },
+          {
+              "type": "url",
+              "id": "button_link",
+              "label": "Button link"
+            }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "gift card slidder"
+    }
+  ]
+}
+{% endschema %}

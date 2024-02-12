@@ -1,0 +1,350 @@
+.article-template > *:first-child:not(.article-template__hero-container) {
+  margin-top: 5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-template > *:first-child:not(.article-template__hero-container) {
+    margin-top: calc(5rem + var(--page-width-margin));
+  }
+}
+
+.article-template__hero-container {
+  max-width: 130rem;
+  margin: 0 auto;
+}
+
+.article-template__hero-small {
+  height: 11rem;
+}
+
+.article-template__hero-medium {
+  height: 22rem;
+}
+
+.article-template__hero-large {
+  height: 33rem;
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .article-template__hero-small {
+    height: 22rem;
+  }
+
+  .article-template__hero-medium {
+    height: 44rem;
+  }
+
+  .article-template__hero-large {
+    height: 66rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .article-template__hero-small {
+    height: 27.5rem;
+  }
+
+  .article-template__hero-medium {
+    height: 55rem;
+  }
+
+  .article-template__hero-large {
+    height: 82.5rem;
+  }
+}
+
+.article-template header {
+  margin-top: 4.4rem;
+  margin-bottom: 2rem;
+  line-height: calc(0.8 / var(--font-body-scale));
+}
+
+@media screen and (min-width: 750px) {
+  .article-template header {
+    margin-top: 5rem;
+  }
+}
+
+.article-template__title {
+  margin: 0;
+}
+
+.article-template__title:not(:only-child) {
+  margin-bottom: 1rem;
+}
+
+.article-template__link {
+  font-size: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.article-template__link .icon-wrap {
+  display: flex;
+  margin-right: 1rem;
+  transform: rotate(180deg);
+}
+
+.article-template__content {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.article-template__social-sharing {
+  margin-top: 3rem;
+}
+
+.article-template__social-sharing + header,
+.article-template__social-sharing + .article-template__content {
+  margin-top: 1.5rem;
+}
+
+.article-template__comment-wrapper {
+  margin-top: 5rem;
+  padding: 2.7rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .article-template__comment-wrapper {
+    margin-top: 6rem;
+    padding: 3.6rem 0;
+  }
+}
+
+.article-template__comment-wrapper h2 {
+  margin-top: 0;
+}
+
+.article-template__comments {
+  margin-bottom: 5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-template__comments {
+    margin-bottom: 7rem;
+  }
+}
+
+.article-template__comments-fields {
+  margin-bottom: 4rem;
+}
+
+.article-template__comments-comment {
+  color: rgba(var(--color-foreground), 0.75);
+  background-color: rgb(var(--color-background));
+  margin-bottom: 1.5rem;
+  padding: 2rem 2rem 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-template__comments-comment {
+    padding: 2rem 2.5rem;
+  }
+}
+
+.article-template__comments-comment p {
+  margin: 0 0 1rem;
+}
+
+.article-template__comment-fields > * {
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .article-template__comment-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 4rem;
+  }
+}
+
+.article-template__comment-warning {
+  margin: 2rem 0 2.5rem;
+}
+
+@media screen and (min-width: 990px) {
+  .article-template__comments .pagination-wrapper {
+    margin: 5rem 0 8rem;
+  }
+}
+
+.article-template__back:last-child {
+  margin-bottom: 3.2rem;
+}
+
+.new-article_recommended_products_wrapper {
+    /* display: flex; */
+    /* align-items: flex-start; */
+    /* justify-content: center; */
+    /* flex-wrap: wrap; */
+}
+.new-article_recommended_products_item {
+    /* max-width: calc(33.33% - 15px); */
+    width: 100%;
+    /* margin-right: 15px; */
+    margin-bottom: 15px;
+}
+.new-article_recommended_products_wrapper .custom__card_heading.card__heading {
+    /* flex-direction: column; */
+}
+/* .new-article_recommended_products_wrapper .product-card-wrapper .card__content.custom {
+       transform: initial;
+} */
+.new-article_recommended_products_wrapper .card__content .price {
+    /* width: 100%; */
+}
+/* .new-article_recommended_products_wrapper .card__information.custom+.quick-add {
+  opacity:initial;
+} */
+.new-article_recommended_products_item:hover .product-card-wrapper .card__content.custom {
+       transform: translateY(0);
+}
+.new-article_recommended_products_item:hover .card__information.custom+.quick-add {
+  opacity:1;
+}
+.new-article_recommended_products_item .quick-add {
+    grid-row-start: 4;
+}
+.new-article_recommended_products_item a.custom__card_product_link {
+    /* display: -webkit-box; */
+    /* overflow: hidden; */
+    /* -webkit-line-clamp: 1; */
+    /* -webkit-box-orient: vertical; */
+}
+.new-article_recommended_products_item .quantity-selector_own {
+  display:none;
+}
+.new-article_recommended_products_item .product-card-wrapper .card__information.custom {
+      /* padding-bottom: 0px!important; */
+}
+@media screen and (max-width:750px) {
+  .new-article_recommended_products_item {
+    /* max-width: calc(50% - 15px); */
+}
+  .article__main__wrapper.page-width {
+    padding: 0;
+}
+}
+@media screen and (min-width: 990px) { 
+.theme-article .page-width--narrow {
+      max-width: 90rem;
+}
+}
+.new-article_recommended_products {
+    overflow: hidden;
+}
+.new-article_recommended_products__main {
+  position:relative;
+  
+}
+.new-article_recommended_products__main .swiper-button-prev:after, .new-article_recommended_products__main .swiper-button-next:after {
+  content:initial;
+}
+.new-article_recommended_products__main .swiper-button-next {
+    right: -3%;
+}
+.new-article_recommended_products__main .swiper-button-prev, .new-article_recommended_products__main .swiper-button-next {
+  color:black;
+  background-color: #fff;
+    border-radius: 50%;
+    width: 31px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new-article_recommended_products__main .swiper-button-prev {
+    transform: rotate(180deg);
+      left: -3%;
+}
+
+.new-article_recommended_products__main svg.icon.icon-caret {
+     height: 13px; 
+}
+.new-article_recommended_products__main .custom__card_heading.card__heading {
+  /* display:initial; */
+}
+@media screen and (min-width:720px) {
+  .new-article_recommended_products__main:not(._hellow-awais) .swiper-button-prev, .new-article_recommended_products__main:not(._hellow-awais) .swiper-button-next {
+display:none;
+}
+}
+@media screen and (min-width:1200px) {
+  .article__main__wrapper {
+       display: flex;
+    gap: 40px;
+    margin-top:40px;
+        justify-content: center;
+    /* flex-wrap:wrap; */
+}
+  article.article-template {
+    width: calc(75% - 20px);
+}
+  .tags__wrapper {
+    width:calc(25% - 20px);
+  }
+  .article-template__hero-container {
+    max-width:initial;
+  }
+}
+.tags__wrapper ul {
+    padding: 0;
+}
+  .tags__wrapper ul li {
+    list-style: none;
+}
+  .tags__wrapper ul li a {
+    text-decoration: none;
+    color: inherit;
+        font-size: 1.5rem;
+     position: relative;
+    display: inline-block;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    padding-bottom: 3px
+}
+.new-article_recommended_title {
+    text-align: center;
+    line-height: 1.25;
+    font-size: 2rem;
+    padding: 16px 0;
+    font-weight: 600;
+}
+  .tags__wrapper ul li a:hover:after {
+    transform: scaleX(1);
+}
+
+.tags__wrapper ul li a:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0% 0%;
+    width: 100%;
+    height: 0.1rem;
+    background: currentColor;
+    transition: transform 300ms ease;
+}
+ul.sf-list-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+@media screen and (min-width: 1350px) {
+.theme-article .article__main__wrapper.page-width {
+    padding: 0 2rem;
+}
+}  
+.theme-article .article__main__wrapper.page-width {
+    max-width: 1100px;
+}
+
+@media screen and (max-width: 750px) {
+    .article-template header, .article-template .article-template__content, .article-template .article-template__back, .article__main__wrapper .tags__wrapper {
+       padding-left: 1.5rem;   
+       padding-right: 1.5rem;   
+    }
+}

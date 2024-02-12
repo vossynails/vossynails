@@ -1,0 +1,257 @@
+<style>
+         @media screen and (max-width: 768px){
+         .collection-meta-wrapper {
+           width: 100%;
+           max-width: 100%;
+         }
+         .collection-meta a {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             text-decoration: none;
+             cursor: pointer;
+             flex-direction: column;
+       }
+       }
+
+
+    .collection-meta-wrapper_main.container.page-width {
+        display: flex;
+        justify-content: space-between;
+        flex-warp: wrap;
+    }
+       .breadcrubms a{
+             color: #393939;
+             font-size:15px;
+             -webkit-text-decoration: none;
+             text-decoration: none;
+     }
+         .breadcrubms a.breadcrumbs_item::before{
+             content:"/";
+             font-size:15px;
+             margin: 0px 5px 0px 3px;
+     }
+
+       .collection-meta-wrapper {
+           display: flex;
+           justify-content: {{ section.settings.align_mini_colls }};
+           gap: 20px;
+       }
+
+       .mini_colls_headng h3.pagetitle.h3
+       {
+         text-align: {{ section.settings.align_mini_colls_head }};
+         padding-bottom: 20px;
+       }
+
+       .collection-meta-wrapper .collection-meta {
+         width: 100%;
+         max-width: 90px;
+         height: auto;
+       }
+
+       h2.collection-meta-title {
+         color: #b3848f;
+         font-size: 14px;
+         font-weight: 600;
+         margin: 8px 0 0;
+         text-align: center;
+         text-transform: lowercase;
+         white-space: normal;
+         text-decoration: none;
+         word-wrap: break-word;
+       }
+       .mini_colls__img img{
+         align-items: center;
+         display: flex;
+         border-radius: 2px;
+         justify-content: center;
+         width: 100%;
+         height: auto;
+         transition: .2s all ease-in-out;
+         object-fit: cover;
+       }
+       .collection-meta a {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         text-decoration: none;
+       }
+
+   .collection-meta-wrapper::-webkit-scrollbar {
+       width: 2px;
+       height: 5px;
+       border-radius: 5px;
+     }
+
+
+     .collection-meta-wrapper::-webkit-scrollbar-track {
+       background: #f1f1f1;
+       border-radius: 5px;
+     }
+
+     .collection-meta-wrapper::-webkit-scrollbar-thumb {
+       background: #B61D0F;
+       border-radius: 5px;
+     }
+
+     .collection-meta-wrapper::-webkit-scrollbar-thumb:hover {
+       background: #555;
+       border-radius: 5px;
+
+     }
+
+   @media screen and (max-width: 768px){
+          .collection-meta-wrapper{
+            justify-content: flex-start;
+          }
+
+          h2.collection-meta-title{
+            font-size: 14px;
+          }
+         .collection-meta-wrapper{
+           gap: 15px;
+         }
+       .collection-meta-wrapper_main.container.page-width {
+          flex-direction: column-reverse;
+
+        }
+         h2.collection-meta-title {
+           font-weight: initial;
+         }
+        }
+   @media screen and (max-width: 1200px) {
+
+    .breadcrubms {
+      margin-bottom: 12px;
+    }
+  }
+</style>
+
+{% if collection.metafields.custom.subcollections_list != blank %}
+  
+  <div
+    class="collection-meta-wrapper_main container page-width"
+    style="padding-top: {{ section.settings.padd_top_mini }}px; padding-bottom: {{ section.settings.padd_bottom_mini }}px;"
+  >
+    <div class="collection-meta-wrapper">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'slide' %}
+            <div class="collection-meta">
+              <a href="{{ block.settings.min_collection_url.url }}">
+                <div class="mini_colls__img">
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1500
+                      | image_tag: loading: 'lazy', sizes: sizes, widths: widths
+                    }}
+                  {% elsif block.settings.image == blank %}
+                    <img
+                      loading="lazy"
+                      src="http://magento.instantsearchplus.com/images/missing.gif"
+                      alt="Girl in a jacket"
+                      width="500"
+                      height="600"
+                    >
+                  {% endif %}
+                </div>
+                {% if block.settings.min_collection_title != blank %}
+                  <h2 class="collection-meta-title">{{ block.settings.min_collection_title }}</h2>
+                {% else %}
+                  <h2 class="collection-meta-title">{{ block.settings.min_collection_url.title }}</h2>
+                {% endif %}
+              </a>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    {% if section.settings.enble_breadcrumbs %}
+      <div class="breadcrubms">
+        <a href="{{ shop.url }}">home</a>
+        <a class="breadcrumbs_item" href=" {{- collection.url | escape -}}">{{- collection.title | escape -}}</a>
+      </div>
+    {% endif %}
+  </div>
+  
+{% endif %}
+
+{% schema %}
+{
+  "name": "mini collections",
+  "tag": "section",
+  "class": "section mini__collections",
+  "settings": [
+    {
+      "type": "header",
+       "content": "Mini collections ",
+       "info": "Don't remove this block is being used to call metafields from collections"
+    },
+    {
+       "type": "text_alignment",
+       "id": "align_mini_colls_head",
+       "label": "Collections Heading Alignment"
+    },
+    {
+       "type": "text_alignment",
+       "id": "align_mini_colls",
+       "label": "Mini Collections Alignment"
+    },
+    {
+      "type": "range",
+      "id": "padd_top_mini",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Top Spacing",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padd_bottom_mini",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom Spacing",
+      "default": 20
+    },
+    {
+    "type":"checkbox",
+     "id":"enble_breadcrumbs",
+     "label":"Enable breadcrumbs"
+  }
+
+  ],
+  "blocks": [
+     {
+       "name": "collection",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         },
+         {
+           "type": "text",
+           "id": "min_collection_title",
+           "label": "collection title"
+         },
+         {
+           "type": "collection",
+           "id": "min_collection_url",
+           "label": "collection url"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "mini collections"
+    }
+  ]
+}
+{% endschema %}

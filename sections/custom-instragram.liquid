@@ -1,0 +1,364 @@
+
+
+{%- style -%}
+     @media screen and (min-width:1000px) { 
+  .instragram_parent .w33 { 
+       flex-grow: 1;
+  }
+  }
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+{% if section.settings.simple_box %}
+  
+  {% comment %} for Equal width boxes {% endcomment %}
+
+  <style>
+  .featured_image.pos-rel.dlfl>* {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+  .featured_image.pos-rel.dlfl {
+    gap: 10px;
+}
+  .featured_image.pos-rel.dlfl .ofc {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+  .instragram_wrapper .w33:before, .kjdsfadskjf:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    background: url(https://cdn.shopify.com/s/files/1/0565/4197/0485/files/1.svg?v=1697203704);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease; transform: translate(-50%, -50%);
+}
+.instragram_wrapper .w33:hover:before, .kjdsfadskjf:hover:before {
+    opacity: 1;
+}
+  @media screen and (max-width: 899px){
+  .featured_image.pos-rel.dlfl>* {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1 0 45%;
+}
+  .featured_image.pos-rel.dlfl {
+    overflow-x: auto;
+    padding-bottom: 2rem;
+}
+  }
+
+  </style>
+ <div class="instragram_wrapper section-{{ section.id }}-padding" style="background:{{ section.settings.background }};">
+  <div class="page-width">
+
+       {% if section.settings.section-titlle_ins != blank %} <h2 class="tac h1" style="color:{{ section.settings.txt_clr }}">{{ section.settings.section-titlle_ins }}</h2>{% endif %}
+       {% if section.settings.paragraph_ins != blank %} <div class="tac" style="color:{{ section.settings.txt_clr }}">{{ section.settings.paragraph_ins }}</div>{% endif %}
+  
+    
+   <div class="dlfl instragram_parent">
+   <div class="featured_image pos-rel dlfl">
+   {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'featured-image' %}
+       <a class="instragram_icon kjdsfadskjf pos-rel" href="{{ block.settings.button_link_ins }}">
+           {% if  block.settings.image_feature !=blank %}
+         {{
+            block.settings.image_feature
+            | image_url: width: 1500
+            | image_tag: sizes: sizes, widths: widths,  class: 'ofc'
+          }}
+          {% endif %}
+       </a>
+      {% when 'navigate-image' %}
+        <div class="w33 pos-rel">
+          <a class="instragram_icon" href="{{ block.settings.button_link_ins1 }}">
+           {% if  block.settings.images_navigate !=blank %}
+          {{
+            block.settings.images_navigate
+            | image_url: width: 1500
+            | image_tag: loading: 'lazy', sizes: sizes, widths: widths,  class: 'ofc'
+          }}
+          {% endif %}
+        </a>
+        </div>
+   {% endcase %}
+   {% endfor %}
+   </div>
+  </div>
+</div>
+</div>
+{% else %}
+  {% comment %} for boxes style {% endcomment %}
+  <style>
+.instragram_parent .w33 img, .featured_image img{
+  border-radius:{{section.settings.border-red}}px;
+    vertical-align: middle;
+}
+.instragram_wrapper .dlfl {
+    gap: 15px !important;
+ 
+}
+  .dlfl.instragram_parent{     width: 100%;}
+a.instragram_icon {
+    display: block;
+}
+.instragram_parent .w33 img {
+    height: auto;
+    vertical-align: middle;
+    width:100%;
+    aspect-ratio: 1/1;
+}
+.featured_image {
+    width: calc(40% - 15px);
+}
+    .navigate_image {
+    width: 60%;
+}
+  .instragram_parent .w33 {
+    width:calc(33% - 9px);
+}
+.featured_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 2/1;
+}
+
+  a.instragram_icon {
+    height: 100%;
+}
+
+.instragram_wrapper .w33:before,
+.instragram_wrapper .featured_image:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    background: url(https://cdn.shopify.com/s/files/1/0565/4197/0485/files/1.svg?v=1697203704);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease; transform: translate(-50%, -50%);
+}
+.instragram_wrapper .featured_image:hover:before, .instragram_wrapper .w33:hover:before {
+    opacity: 1;
+}
+
+  @media screen and (max-width:768px){
+    .featured_image, .navigate_image {
+      width: calc(100% - 0px);
+  }
+    .instragram_wrapper .dlfl {
+    gap: 10px !important;
+}
+    .instragram_parent.dlfl{
+      flex-wrap:wrap;
+    }
+      .featured_image img {
+    width: 100%;
+    height: auto;
+}
+  .instragram_wrapper .w33 {
+    width: calc(50% - 5px);
+}
+  .instragram_parent .w33 img {
+    width: 100%;
+    height: 100%;
+}
+     .featured_image img {
+    aspect-ratio:1 !important;
+  }
+  }
+  @media screen and (max-width:768px) { 
+  .featured_image.pos-rel {
+    display: none;
+}
+  }
+</style>
+
+ <div class="instragram_wrapper section-{{ section.id }}-padding" style="background:{{ section.settings.background }};">
+  <div class="page-width">
+
+       {% if section.settings.section-titlle_ins != blank %} <h2 class="tac h1" style="color:{{ section.settings.txt_clr }}">{{ section.settings.section-titlle_ins }}</h2>{% endif %}
+       {% if section.settings.paragraph_ins != blank %} <div class="tac" style="color:{{ section.settings.txt_clr }}">{{ section.settings.paragraph_ins }}</div>{% endif %}
+  
+    
+   <div class="dlfl instragram_parent">
+   <div class="featured_image pos-rel">
+   {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'featured-image' %}
+       <a class="instragram_icon" href="{{ block.settings.button_link_ins }}">
+           {% if  block.settings.image_feature !=blank %}
+         {{
+            block.settings.image_feature
+            | image_url: width: 1500
+            | image_tag: sizes: sizes, widths: widths,  class: 'ofc'
+          }}
+          {% endif %}
+       </a>
+   {% endcase %}
+   {% endfor %}
+      </div>
+
+  
+ <div class="dlfl fww navigate_image pos-rel">
+    {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'navigate-image' %}
+        <div class="w33 pos-rel">
+          <a class="instragram_icon" href="{{ block.settings.button_link_ins1 }}">
+           {% if  block.settings.images_navigate !=blank %}
+          {{
+            block.settings.images_navigate
+            | image_url: width: 1500
+            | image_tag: loading: 'lazy', sizes: sizes, widths: widths,  class: 'ofc'
+          }}
+          {% endif %}
+        </a>
+        </div>
+   {% endcase %}
+   {% endfor %}
+   </div>
+  </div>
+</div>
+</div>
+{% endif %}
+
+
+
+{% schema %}
+  {
+    "name": "Instagram",
+    "settings": [
+      {
+        "type": "text",
+        "id": "section-titlle_ins",
+        "label": "Heading",
+        "default": "gift card headings"
+      },
+      {
+        "type": "richtext",
+        "id": "paragraph_ins",
+        "label": "Description"
+      },
+      {
+        "type": "checkbox",
+        "id": "simple_box",
+        "label": "Equal width boxes"
+      },
+            {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#F0E6E2"
+      },
+      {
+        "type": "color",
+        "id": "txt_clr",
+        "label": "Heading color",
+        "default": "#000000"
+      },
+     {
+      "type": "range",
+      "id": "border-red",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner radius around image",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+      {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+    ],
+    "blocks":[
+      {
+        "type":"featured-image",
+        "name":"Featured Image",
+        "limit":8,
+        "settings":[
+          {
+            "type": "image_picker",
+            "id": "image_feature",
+            "label": "Image"
+          },
+          {
+          "type": "url",
+          "id": "button_link_ins",
+          "label": "Instragran link"
+        }
+
+        ]
+      },
+      {
+        "type":"navigate-image",
+        "name":"Navigate Images",
+        "limit":8,
+        "settings":[
+          {
+            "type": "image_picker",
+            "id": "images_navigate",
+            "label": "Image"
+          },
+          {
+          "type": "url",
+          "id": "button_link_ins1",
+          "label": "Instragran link"
+        }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Custom instagram"
+      }
+    ]
+  }
+{% endschema %}

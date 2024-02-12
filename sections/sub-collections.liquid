@@ -1,0 +1,124 @@
+<style>
+  .sub-collections_main-con{
+    margin-bottom: 10px;
+    margin-top: 30px
+  }
+  .subcollections-col {
+    display: flex;
+    gap: 1.25rem;
+}
+  .sub-collection-row {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+  .breadcrubms a{
+    color: #393939;
+    font-size:15px;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+}
+  .breadcrubms a.breadcrumbs_item::before{
+    content:"/";
+    font-size:15px;
+    margin: 0px 5px 0px 3px;
+  }
+  .collection_item {
+    text-align: center;
+}
+  .subcollections-col-item{
+    text-decoration: none
+  }
+  .collection_item_title {
+    color: #b3848f;
+    font-size: 17px;
+    font-weight: 600;
+    margin: 8px 0 0;
+    text-align: center;
+    text-transform: lowercase;
+    white-space: normal;
+    text-decoration: none;
+}
+  .collection_item_image{
+    width: 120px
+  }
+  .collection_item_image img{
+    width: 100%;
+    height: auto;
+    object-fit:cover;
+    background: rgb(243 243 243);
+  border-radius: 4px;
+  }
+   @media screen and (max-width: 1200px) {
+     .sub-collection-row{
+       flex-direction: column-reverse;
+     }
+     .breadcrubms{
+       margin-bottom: 12px;
+     }
+   }
+   @media screen and (max-width: 750px) {
+     .collection_item_image{
+       width: 90px
+     }
+   }
+</style>
+<div class="sub-collections_main-con page-width">
+  <div class="sub-collection-row">
+    <div class="subcollections-col">
+       {% assign collectionMetafield = collection.metafields.ecomposer.collections.value %}
+        {% for customCollection in collectionMetafield %}
+          <a class="subcollections-col-item" href="{{ customCollection.url }}">
+           <div class="collection_item">
+             <div class="collection_item_image" >
+           {% if customCollection.featured_image != blank %}
+               {{ customCollection.featured_image
+                  | image_url: width: 120
+                  | image_tag: loading: 'lazy', sizes: sizes, widths: widths
+                }}
+             {% else %}
+             {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+             {% endif %}
+            </div>
+              <div class="collection_item_title">
+                {{ customCollection.title }}
+              </div>
+          </div>
+          </a>
+        {% endfor %}
+    </div>
+    {% if section.settings.enble_breadcrumbs %}
+      <div class="breadcrubms">
+        <a href="{{ shop.url }}">home </a>
+        <a class="breadcrumbs_item" href=" {{- collection.url | escape -}}">  {{- collection.title | escape -}} </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sub collections",
+  "settings": [
+
+         {
+        "type":"checkbox",
+        "id":"enble_breadcrumbs",
+        "label":"Enable breadcrumbs"
+      },
+    {
+        "type":"collection",
+        "id":"add_sub_collection",
+        "label":"Sub collection"
+      }
+  ],
+
+   
+
+  "presets":[
+    {
+      "name":"Sub collections"
+    }
+  ]
+}
+{% endschema %}

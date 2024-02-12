@@ -1,0 +1,135 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    .no_desk {
+    display: none;
+}
+  }
+  h2.upper-heading {
+    text-align: {{ section.settings.heading_alignment }};
+        font-size: 2.2rem;
+    color:{{ section.settings.heading_color }};
+        margin-bottom: 2.2rem;
+}
+  .content-description p {
+    margin-top: 0;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+}
+  .content-wrapper {
+    margin-bottom: 2rem;
+}
+  h2.content-heading {
+    margin: 0;
+        font-size: 1.7rem;
+        margin-bottom: 0.4rem;
+}
+{%- endstyle -%}
+<div class="page-width section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} no_desk">
+  <div class="main-wrapper-text">
+    <h2 class="upper-heading">{{ section.settings.uheading }}</h2>
+    {% for block in section.blocks %}
+      <div class="content-wrapper">
+        <h2 class="content-heading">{{ block.settings.heading }}</h2>
+        <div class="content-description">{{ block.settings.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "text section mobile",
+  "settings": [
+          {
+    "type": "inline_richtext",
+    "id": "uheading",
+    "label": "Heading"
+  },
+    {
+      "type":"color",
+      "id":"heading_color",
+      "label":"Heading color",
+      "default":"#b3848f"
+    },
+    {
+  "type": "select",
+  "id": "heading_alignment",
+  "label": "Heading alignment",
+  "options": [
+    {
+      "value": "left",
+      "label": "Left"
+    },
+    {
+      "value": "center",
+      "label": "Center"
+    },
+    {
+      "value": "right",
+      "label": "Right"
+    }
+  ],
+  "default": "center"
+},
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks":[
+    {
+      "type":"text",
+      "name":"Text",
+      "settings":[
+
+              {
+    "type": "inline_richtext",
+    "id": "heading",
+    "label": "Heading"
+  },
+          {
+    "type": "richtext",
+    "id": "description",
+    "label": "Description"
+  }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name":"text section mobile"
+    }
+  ]
+}
+{% endschema %}

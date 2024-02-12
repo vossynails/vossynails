@@ -1,0 +1,42 @@
+<style>
+ .article__video {
+    padding: 30px 0;
+}
+  .custom-video {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  video.custom-video__video.js-video-el {
+        height: auto;
+    max-width: 100%;
+  }
+  
+</style>
+<div class="article__video">
+  <div class="custom-video">
+    <video 
+      class="custom-video__video js-video-el"
+      src="{{ article.metafields.custom.video_url }}" 
+      poster="{{ article.metafields.custom.video_poster_url }}"
+      controls playsinline
+    >
+        Sorry, your browser doesn't support embedded videos            
+    </video>
+  </div>
+</div>
+<!-- 
+<script>
+  let playBtn = document.querySelector('.js-video-btn')
+  let video = document.querySelector('.js-video-el')
+  playBtn.addEventListener('click', ()=> {
+      video.play()
+  })
+  video.addEventListener('play', ()=> {
+      playBtn.style.display = 'none'
+  })
+  video.addEventListener('pause', ()=> {
+      playBtn.style.display = 'block'
+  })
+</script> -->

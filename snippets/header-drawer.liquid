@@ -1,0 +1,1036 @@
+<style>
+  @media screen and (max-width:989px) {
+  
+  li.menu_list.to_bee__collapsable.has-custom-megamenu>a:before{
+    content: "\002B";
+    position: absolute;
+    top: 35%;
+    right: 0;
+}
+    a.td-none.custom__list_item:before {
+    content: "\002B";
+    position: absolute;
+    right: 0;
+}
+  li.menu_list.to_bee__collapsable.has-custom-megamenu>a.selected:before, a.td-none.custom__list_item.activated_menu:before {
+    content: "\2212";
+}
+    li.menu_list>a{
+    position:relative;
+}
+  }
+  
+.to_bee__collapsable_sibling a.menu-drawer__menu-item.link {
+    color: #393939;
+}
+  header-drawer span.menu-drawer__menu-item.list-menu__item.selected:before, .our_working_memu.selected:before {
+    content:"\2212"
+  }
+.working__menu ul.menu-drawer__menu.list-menu {
+    margin-left: 8px;
+    padding: 0 20px 0 25px;
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
+  li.working__menu {
+    padding: 13px 0;
+}
+ul.menu-drawer__menu.has-submenu.list-menu {
+    /* padding: 0 1.5rem; */
+    padding-left: 18px;
+    padding-right: 24px;
+}
+  li.menu_list {
+    border-bottom: 1px solid #FCA4B7;
+    margin-bottom:0;
+    position:relative;
+}
+  .working__menu li a {
+        font-size:calc(0.9375rem / .625) !important; 
+    /* letter-spacing: 0.1em; */
+    
+  }
+header-drawer .menu_list .list-menu__item {
+    padding-left: 0;
+    font-size: calc(1.25rem / .625);
+    font-weight: 600;
+    color: #b3848f;
+}
+ header-drawer .gradient.menu-drawer {
+    /* background: #FFF3F5; */
+}
+.our_working_memu {
+    /* font-size: 1.7rem !important; */
+    /* letter-spacing: 0.1em; */
+     font-size: calc(1.25rem / .625);
+    font-weight: 600;
+    color: #b3848f;
+}
+  header-drawer .our_working_memu {
+      cursor: pointer;
+}
+ header-drawer .menu-drawer__menu-item--active, .menu-drawer__menu-item--active:hover, .menu-drawer__menu-item:hover, .menu-drawer__menu-item {
+    background:initial;
+  }
+header-drawer .menu_list ul {
+    padding-left: 1.1rem;
+}
+ header-drawer .menu_list span:before, .our_working_memu:before  {
+    position: absolute;
+    content: "\002B";
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #b3848f;
+ }
+  header-drawer .menu_list span, .our_working_memu{
+  position:relative;
+  }
+header-drawer .menu_list .list-menu__item {
+    justify-content: start;
+}
+header-drawer .active_menu_item {
+  overflow: initial!important;
+    height: initial; 
+   max-height: initial !important;
+      padding-left: 0 !important;
+}
+  header-drawer .menu_list ul {
+    /* overflow: initial!important;
+    height: initial; */
+    /* max-height: initial !important; */
+}
+ header-drawer span.menu-drawer__menu-item.list-menu__item.active+.active_menu_item_ejhrebrer {
+    max-height:initial !important;
+  }
+header-drawer svg.svg__dropdown {
+    max-width: 20px;
+    max-height: 20px;
+}
+  header-drawer.my__menu__mobile.menu-drawer {
+    visibility:hidden;
+    height:0;
+  transform:scaley(0) !important;
+    transition:all 300ms ease;
+  transform-origin:top;
+  }
+
+ header-drawer .active_menu.my__menu__mobile.menu-drawer  {
+  transform:scaley(1) !important;
+    visibility:visible;
+    height:100vh;
+  }
+header-drawer .menu_list ul {
+     /* max-height: 0; */
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      margin-bottom: 5px;
+    }
+header-drawer .list-menu__item {
+    justify-content: center;
+}
+header-drawer details[open]:not(.menu-opening)>.header__icon--menu .icon-hamburger {
+       visibility: initial !important;
+      opacity: 0 !important;
+}
+  header-drawer details[open]:not(.menu-opening)>.header__icon--menu .icon-close {
+    visibility:visible !important;
+}
+  @media screen and (max-width:1000px) {
+    .menu-drawer__utility-links {
+    display: none;
+}
+  }
+  .list-menu__item {
+    user-select: none;
+}
+ header-drawer .header__icon--menu[aria-expanded=true]:before { 
+  content:initial !important;
+  }
+
+  .menu-drawer__menu-item {
+    padding: 20px 0;
+    text-decoration: none;
+      font-size: calc(1.8rem / .625);
+}
+li.to_bee__collapsable img {
+    width: 100%;
+    height: auto;
+    max-width: 50px;
+    aspect-ratio: 1/1;
+    border-radius: 3px;
+}
+.to_bee__collapsable_sibling {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 14px;
+  font-size:calc(0.9375rem / .625);
+} 
+ul.do__collapse.menu-drawer__menu.list-menu.second_parent_ul li:last-child {
+    margin-bottom: 0;
+}
+  </style>
+ 
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var menuItems = document.querySelectorAll('li.menu_list.to_bee__collapsable');
+
+    menuItems.forEach(function(item) {
+      var hasCustomMegamenu = item.querySelector('.custom_megamenu');
+
+      if (hasCustomMegamenu) {
+        // Add a class to the parent li
+        item.classList.add('has-custom-megamenu');
+      }
+    });
+  });
+</script>
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {% render 'icon-hamburger' %}
+        {% render 'icon-close' %}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              {%- for link in section.settings.menu.links -%}
+                <li class="menu_list to_bee__collapsable">
+                  {%- if link.links != blank -%}
+                    <div id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+                      <span
+                        id="HeaderDrawer-{{ link.handle }}"
+                        class="same__collapsing menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                      >
+                        {{ link.title | escape }}
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" x="0" y="0" viewBox="0 0 292.362 292.362" style="enable-background:new 0 0 512 512" xml:space="preserve" class="svg__dropdown"><g><path d="M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z" fill="#000000" opacity="1" data-original="#000000" class=""></path></g></svg> -->
+                     
+                      </span>
+                          <ul class="menu-drawer__menu list-menu do__collapse" role="list" tabindex="-1">
+                            {%- for childlink in link.links -%}
+                              <li class="working__menu to_bee__collapsable">
+                                {%- if childlink.links == blank -%}
+                                  <a
+                                    id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
+                                    href="{{ childlink.url }}"
+                                    class="tsting menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    {% if childlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ childlink.title | escape }}
+                                  </a>
+<!-- custom start -->
+    {% if link.title == section.settings.menu_item %}
+            <div class="custom_megamenu">
+            <div class="pos-rel page-width">
+              <div class="header-menu-content-wrapper dlfl">
+                <div class="header-menu">
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when "Megamenu" %}
+                    <a
+                      href="{{ block.settings.link_title  }}"
+                      class="td-none custom__list_item {% if  forloop.index0 == 0   %}active{% endif %}"
+                    >
+                      {{- block.settings.manu -}}
+                    </a>
+
+                    <div class="td-none products-wrapper dlfl fww">
+                          {% if block.settings.image != blank %}
+                      <a href="{{ block.settings.link }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image != blank %}
+                            {{
+                              block.settings.image
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image1 != blank %}
+                      <a href="{{ block.settings.link1 }}">
+                        <div class="td-none header-menu-image">
+                          {% if block.settings.image1 != blank %}
+                            {{
+                              block.settings.image1
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title1 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image2 != blank %}
+                      <a href="{{ block.settings.link2 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image2 != blank %}
+                            {{
+                              block.settings.image2
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title2 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image3 != blank %}
+                      <a href="{{ block.settings.link3 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image3 != blank %}
+                            {{
+                              block.settings.image3
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title3 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image4 != blank %}
+                      <a href="{{ block.settings.link4 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image4 != blank %}
+                            {{
+                              block.settings.image4
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title4 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image5 != blank %}
+                      <a href="{{ block.settings.link5 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image5 != blank %}
+                            {{
+                              block.settings.image5
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title5 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image6 != blank %}
+                      <a href="{{ block.settings.link6 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image6 != blank %}
+                            {{
+                              block.settings.image6
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title6 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image7 != blank %}
+                      <a href="{{ block.settings.link7 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image7 != blank %}
+                            {{
+                              block.settings.image7
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title7 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image8 != blank %}
+                      <a href="{{ block.settings.link8 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image8 != blank %}
+                            {{
+                              block.settings.image8
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title8 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image9 != blank %}
+                      <a href="{{ block.settings.link9 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image9 != blank %}
+                            {{
+                              block.settings.image9
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title9 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image10 != blank %}
+                      <a href="{{ block.settings.link10 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image10 != blank %}
+                            {{
+                              block.settings.image10
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title10 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image10 != blank %}
+                      <a href="{{ block.settings.link11 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image11 != blank %}
+                            {{
+                              block.settings.image11
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title11 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image12 != blank %}
+                      <a href="{{ block.settings.link12 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image12 != blank %}
+                            {{
+                              block.settings.image12
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title12 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image13 != blank %}
+                      <a href="{{ block.settings.link13 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image13 != blank %}
+                            {{
+                              block.settings.image13
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title13 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image14 != blank %}
+                      <a href="{{ block.settings.link14 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image14 != blank %}
+                            {{
+                              block.settings.image14
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title14 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image15 != blank %}
+                      <a href="{{ block.settings.link15 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image15 != blank %}
+                            {{
+                              block.settings.image15
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title15 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image16 != blank %}
+                      <a href="{{ block.settings.link16 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image16 != blank %}
+                            {{
+                              block.settings.image16
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title16 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image17 != blank %}
+                      <a href="{{ block.settings.link17 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image17 != blank %}
+                            {{
+                              block.settings.image17
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title17 }}</span>
+                      </a>
+{% endif %}
+                      
+                      <div class="tac__buttonss_buttons" style="margin-top:10px; margin-bottom:15px; width:100%; display:flex; justify-content:start; padding-right:53px;"><a class="tac buttonss" href="{{ block.settings.view_btn_link }}">
+                        {{- block.settings.view_btn -}}
+                      </a></div>
+                    </div>
+                      {% endcase %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            </div>
+          {% endif %}
+<!-- custom end  -->
+                                
+                                {%- else -%}
+                                  <div id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
+                                  
+                                     <div class="our_working_memu same__collapsing"> {{ childlink.title | escape }}</div>
+                                      
+                                      <ul
+                                        class="do__collapse menu-drawer__menu list-menu second_parent_ul"
+                                        role="list"
+                                        tabindex="-1"
+                                      >
+                                        {%- for grandchildlink in childlink.links -%}
+                                          <li class="to_bee__collapsable to_bee__collapsable_sibling this_list_item{{ forloop.index }}">
+                                         {% assign kvperfe = grandchildlink.title | escape | replace: ' ', '-' | append: ".png" %}
+                                          <img src="{{ kvperfe | file_url }}" alt="Global Image" width="200px" height="200px">                                            
+                                            <a
+                                              id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                              href="{{ grandchildlink.url }}"
+                                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                              {% if grandchildlink.current %}
+                                                aria-current="page"
+                                              {% endif %}
+                                            >{{ grandchildlink.title | escape }}</a>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+
+                                  </div>
+                                {%- endif -%}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                    </div>
+                  {%- else -%}
+                    <a
+                      id="HeaderDrawer-{{ link.handle }}"
+                      href="{{ link.url }}"
+                      class=" tesging11 menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                      {% if link.current %}
+                        aria-current="page"
+                      {% endif %}
+                    >
+                      {{ link.title | escape }}
+                    </a>
+
+                  <!-- custom start -->
+    {% if link.title == section.settings.menu_item %}
+            <div class="custom_megamenu">
+            <div class="pos-rel">
+              <div class="header-menu-content-wrapper dlfl">
+                <div class="header-menu">
+                  {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when "Megamenu" %}
+                    <a
+                      href="{{ block.settings.link_title  }}"
+                      class="td-none custom__list_item {% if  forloop.index0 == 0   %}active{% endif %}"
+                    >
+                      {{- block.settings.manu -}}
+                    </a>
+
+                    <div class="td-none products-wrapper dlfl fww">
+                          {% if block.settings.image != blank %}
+                      <a href="{{ block.settings.link }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image != blank %}
+                            {{
+                              block.settings.image
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image1 != blank %}
+                      <a href="{{ block.settings.link1 }}">
+                        <div class="td-none header-menu-image">
+                          {% if block.settings.image1 != blank %}
+                            {{
+                              block.settings.image1
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title1 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image2 != blank %}
+                      <a href="{{ block.settings.link2 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image2 != blank %}
+                            {{
+                              block.settings.image2
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title2 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image3 != blank %}
+                      <a href="{{ block.settings.link3 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image3 != blank %}
+                            {{
+                              block.settings.image3
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title3 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image4 != blank %}
+                      <a href="{{ block.settings.link4 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image4 != blank %}
+                            {{
+                              block.settings.image4
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title4 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image5 != blank %}
+                      <a href="{{ block.settings.link5 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image5 != blank %}
+                            {{
+                              block.settings.image5
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title5 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image6 != blank %}
+                      <a href="{{ block.settings.link6 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image6 != blank %}
+                            {{
+                              block.settings.image6
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title6 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image7 != blank %}
+                      <a href="{{ block.settings.link7 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image7 != blank %}
+                            {{
+                              block.settings.image7
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title7 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image8 != blank %}
+                      <a href="{{ block.settings.link8 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image8 != blank %}
+                            {{
+                              block.settings.image8
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title8 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image9 != blank %}
+                      <a href="{{ block.settings.link9 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image9 != blank %}
+                            {{
+                              block.settings.image9
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title9 }}</span>
+                      </a>
+{% endif %}
+                          {% if block.settings.image10 != blank %}
+                      <a href="{{ block.settings.link10 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image10 != blank %}
+                            {{
+                              block.settings.image10
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title10 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image10 != blank %}
+                      <a href="{{ block.settings.link11 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image11 != blank %}
+                            {{
+                              block.settings.image11
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title11 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image12 != blank %}
+                      <a href="{{ block.settings.link12 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image12 != blank %}
+                            {{
+                              block.settings.image12
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title12 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image13 != blank %}
+                      <a href="{{ block.settings.link13 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image13 != blank %}
+                            {{
+                              block.settings.image13
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title13 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image14 != blank %}
+                      <a href="{{ block.settings.link14 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image14 != blank %}
+                            {{
+                              block.settings.image14
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title14 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image15 != blank %}
+                      <a href="{{ block.settings.link15 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image15 != blank %}
+                            {{
+                              block.settings.image15
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title15 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image16 != blank %}
+                      <a href="{{ block.settings.link16 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image16 != blank %}
+                            {{
+                              block.settings.image16
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title16 }}</span>
+                      </a>
+{% endif %}
+                                             {% if block.settings.image17 != blank %}
+                      <a href="{{ block.settings.link17 }}">
+                        <div class="header-menu-image">
+                          {% if block.settings.image17 != blank %}
+                            {{
+                              block.settings.image17
+                              | image_url: width: 1500
+                              | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'wh100 ofc'
+                            }}
+                          {% endif %}
+                        </div>
+                        <span>{{ block.settings.title17 }}</span>
+                      </a>
+{% endif %}
+                      
+                      <div class="tac__buttonss_buttons" style="display:flex; justify-content:start;"><a class="tac buttonss" href="{{ block.settings.view_btn_link }}">
+                        {{- block.settings.view_btn -}}
+                      </a></div>
+                    </div>
+                      {% endcase %}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            </div>
+          {% endif %}
+<!-- custom end  -->
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          <div class="menu-drawer__utility-links">
+            {%- if shop.customer_accounts_enabled -%}
+              <a
+                href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+                class="menu-drawer__account link focus-inset h5 medium-hide large-up-hide"
+              >
+                {% render 'icon-account' %}
+                {%- liquid
+                  if customer
+                    echo 'customer.account_fallback' | t
+                  else
+                    echo 'customer.log_in' | t
+                  endif
+                -%}
+              </a>
+            {%- endif -%}
+            {%- if localization.available_countries or localization.available_languages -%}
+              <div class="menu-drawer__localization header-localization">
+                {%- if localization.available_countries and localization.available_countries.size > 1 -%}
+                  <noscript>
+                    {%- form 'localization', id: 'HeaderCountryMobileFormNoScriptDrawer', class: 'localization-form' -%}
+                      <div class="localization-form__select">
+                        <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScriptDrawer">
+                          {{ 'localization.country_label' | t }}
+                        </h2>
+                        <select
+                          class="localization-selector link"
+                          name="country_code"
+                          aria-labelledby="HeaderCountryMobileLabelNoScriptDrawer"
+                        >
+                          {%- for country in localization.available_countries -%}
+                            <option
+                              value="{{ country.iso_code }}"
+                              {%- if country.iso_code == localization.country.iso_code %}
+                                selected
+                              {% endif %}
+                            >
+                              {{ country.name }} ({{ country.currency.iso_code }}
+                              {{ country.currency.symbol }})
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                        {% render 'icon-caret' %}
+                      </div>
+                      <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+                    {%- endform -%}
+                  </noscript>
+
+                  <localization-form class="no-js-hidden">
+                    {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                      <div>
+                        <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                          {{ 'localization.country_label' | t }}
+                        </h2>
+                        {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                      </div>
+                    {%- endform -%}
+                  </localization-form>
+                {% endif %}
+
+                {%- if localization.available_languages and localization.available_languages.size > 1 -%}
+                  <noscript>
+                    {%- form 'localization',
+                      id: 'HeaderLanguageMobileFormNoScriptDrawer',
+                      class: 'localization-form'
+                    -%}
+                      <div class="localization-form__select">
+                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScriptDrawer">
+                          {{ 'localization.language_label' | t }}
+                        </h2>
+                        <select
+                          class="localization-selector link"
+                          name="locale_code"
+                          aria-labelledby="HeaderLanguageMobileLabelNoScriptDrawer"
+                        >
+                          {%- for language in localization.available_languages -%}
+                            <option
+                              value="{{ language.iso_code }}"
+                              lang="{{ language.iso_code }}"
+                              {%- if language.iso_code == localization.language.iso_code %}
+                                selected
+                              {% endif %}
+                            >
+                              {{ language.endonym_name | capitalize }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                        {% render 'icon-caret' %}
+                      </div>
+                      <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+                    {%- endform -%}
+                  </noscript>
+
+                  <localization-form class="no-js-hidden">
+                    {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                      <div>
+                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                          {{ 'localization.language_label' | t }}
+                        </h2>
+                        {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                      </div>
+                    {%- endform -%}
+                  </localization-form>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            <ul class="list list-social list-unstyled" role="list">
+              {%- if settings.social_twitter_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
+                    {%- render 'icon-twitter' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_facebook_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
+                    {%- render 'icon-facebook' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_pinterest_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_pinterest_link }}" class="list-social__link link">
+                    {%- render 'icon-pinterest' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
+                    {%- render 'icon-instagram' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_tiktok_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
+                    {%- render 'icon-tiktok' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_tumblr_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_tumblr_link }}" class="list-social__link link">
+                    {%- render 'icon-tumblr' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_snapchat_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_snapchat_link }}" class="list-social__link link">
+                    {%- render 'icon-snapchat' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_youtube_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
+                    {%- render 'icon-youtube' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_vimeo_link != blank -%}
+                <li class="list-social__item">
+                  <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
+                    {%- render 'icon-vimeo' -%}
+                    <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>
